@@ -1,0 +1,90 @@
+@import "bootstrap/scss/bootstrap";
+
+nav.navbar a.icon-link {
+    color: #fff;
+    text-decoration: none;
+}
+
+#results {
+    margin-top: 7em;
+    margin-bottom: 3em;
+}
+
+#pager ul.pagination {
+    margin: 0.5em auto;
+}
+
+.lead .text-bg-warning.p-1 {
+    transform: skewY(-3deg);
+    display: inline-block;
+    font-weight: bold;
+}
+
+.card {
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 0.5rem;
+    
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        background-color: #f2f1f1;
+    }
+}
+.card .card-img-top {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+.card-body {
+    padding: 1rem;
+}
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+}
+
+.card,
+.card img.card-img-top {
+    min-width: 200px;
+}
+
+.card .icon-link {
+    display: inline-block;
+}
+
+.card .icon-link svg {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+}
+
+.card .icon-link.icon-link-hover:hover {
+    transform: scaleX(.9) scaleY(.9);
+}
+
+/* Additional styling for badges */
+.card .list-group-item {
+    display: flex;
+    justify-content: space-between;
+}
+.card .badge {
+    font-size: 0.9rem;
+    padding: 0.5em;
+}
+
+#favslist:empty {
+    background-color: #f2f1f1;
+}
+
+#favslist:empty::before {
+    content: "Favs Will Show Up Here!";
+}
+
+#favslist a.icon-link {
+    color: #333;
+}
+
+#favslist a.icon-link svg {
+    fill: red;
+}
