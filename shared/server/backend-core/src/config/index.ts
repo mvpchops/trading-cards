@@ -27,30 +27,30 @@ else {
 	process.exit(1);
 }
 
-// if we are NOT running in a test or production environment,
+// if we are NOT running in a specified environment,
 // we want to use the development environment
-if (!["test", "development"].includes(process.env.NODE_ENV || "")) {
+if (!["test", "development", "production", "staging"].includes(process.env.NODE_ENV || "")) {
 	process.env.NODE_ENV = "development";
 }
 
-// load a local .env.*.local file unless in production
+// load a local .env.*.local file unless not in development or test mode
 let pathToLocalEnvFile: string;
 const isDevOrTestEnv = ["test", "development"].includes(
-	process.env.NODE_ENV || "development",
+	process.env.NODE_ENV || ""
 );
 
 if (isDevOrTestEnv) {
-	console.log(`Running in ${process.env.NODE_ENV} mode`);
 	pathToLocalEnvFile = path.resolve(
 		...backToRoot,
 		`.env.${process.env.NODE_ENV}.local`,
 	);
 	Dotenv.config({ path: pathToLocalEnvFile });
-	console.log(`Loaded env file from ${pathToLocalEnvFile}`);
+	console.log(`Loaded env file from ${pathToLocalEnvFile.substring(pathToLocalEnvFile.indexOf('.env'))}`);
 } else {
-	console.log("Running in production mode");
 	Dotenv.config();
 }
+
+console.log(`Running in [${(process.env.NODE_ENV || "UNKNOWN").toUpperCase()}] mode`);
 
 const reloadEnv = () => {
 	if (isDevOrTestEnv) {
