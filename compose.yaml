@@ -1,0 +1,42 @@
+
+services:
+  db:
+    image: postgres:16.2
+    restart: always
+    container_name: cards-mvp-db
+    user: postgres
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - POSTGRES_DB=cards-mvp
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  redis:
+    image: redis:7.0.15
+    restart: always
+    container_name: cards-mvp-redis
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  # redisinsight:
+  #   image: redislabs/redisinsight:latest
+  #   restart: always
+  #   depends_on:
+  #     - redis
+  #   container_name: cards-mvp-redisinsight
+  #   ports:
+  #     - 8001:8001
+  #   environment:
+  #     - REDIS_HOST=redis
+  #     - REDIS_PORT=6379
+
