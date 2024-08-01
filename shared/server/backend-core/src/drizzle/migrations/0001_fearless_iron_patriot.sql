@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX IF NOT EXISTS "user_card_id_index" ON "favorites" USING btree ("card_id","user_id");
