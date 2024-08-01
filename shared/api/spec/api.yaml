@@ -18,7 +18,7 @@ tags:
 paths:
   /:
     get:
-      summary: API Home
+      summary: API Home & Healthcheck URI
       description: The home endpoint for this API. Displays basic informational message
       operationId: apiHome
       responses:
