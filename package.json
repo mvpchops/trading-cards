@@ -1,0 +1,40 @@
+{
+  "name": "trading-cards-mvp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha",
+    "check": "pnpm -r run check",
+    "clean": "pnpm -r run clean",
+    "start": "pnpm --stream -r start",
+    "build": "pnpm --stream -r run build",
+    "build:dev": "pnpm --parallel --stream -r run build:dev",
+    "start:dev": "pnpm --parallel --stream -r run start:dev"
+  },
+  "keywords": [],
+  "author": "MVP Chops <mvpchops@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@parcel/transformer-sass": "2.12.0",
+    "@testcontainers/postgresql": "^10.10.3",
+    "@testcontainers/redis": "^10.10.3",
+    "@tsconfig/strictest": "^2.0.4",
+    "@types/chai": "^4.3.16",
+    "@types/mocha": "^10.0.7",
+    "chai": "^5.1.1",
+    "mocha": "^10.6.0",
+    "process": "^0.11.10",
+    "testcontainers": "^10.10.3",
+    "tsup": "^8.0.2",
+    "tsx": "^4.15.7",
+    "typescript": "^5.5.2"
+  },
+  "packageManager": "pnpm@9.0.6+sha256.0624e30eff866cdeb363b15061bdb7fd9425b17bc1bb42c22f5f4efdea21f6b3",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "postgres": "^3.4.4"
+  }
+}
