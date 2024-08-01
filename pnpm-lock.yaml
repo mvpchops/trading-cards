@@ -61,6 +61,25 @@ importers:
         specifier: ^5.5.2
         version: 5.5.4
 
+  server/searchcards:
+    dependencies:
+      axios:
+        specifier: ^1.7.2
+        version: 1.7.2
+      backend-core:
+        specifier: workspace:^
+        version: link:../../shared/server/backend-core
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
+      exponential-backoff:
+        specifier: ^3.1.1
+        version: 3.1.1
+    devDependencies:
+      '@types/express-serve-static-core':
+        specifier: ^4.19.5
+        version: 4.19.5
+
   shared/api/spec:
     dependencies:
       '@apidevtools/swagger-parser':
@@ -1556,9 +1575,6 @@ packages:
   '@types/node@20.14.13':
     resolution: {integrity: sha512-+bHoGiZb8UiQ0+WEtmph2IWQCjIqg8MDZMAV+ppRRhUZnquF5mQkP/9vpSwJClEiSM/C7fZZExPzfU0vJTyp8w==}
 
-  '@types/node@22.0.2':
-    resolution: {integrity: sha512-yPL6DyFwY5PiMVEwymNeqUTKsDczQBJ/5T7W/46RwLU/VH+AA8aT5TZkvBviLKLbbm0hlfftEkGrNzfRk/fofQ==}
-
   '@types/passport-jwt@4.0.1':
     resolution: {integrity: sha512-Y0Ykz6nWP4jpxgEUYq8NoVZeCQPo1ZndJLfapI249g1jHChvRfZRO/LS3tqu26YgAS/laI1qx98sYGz0IalRXQ==}
 
@@ -2547,6 +2563,9 @@ packages:
   exit@0.1.2:
     resolution: {integrity: sha512-Zk/eNKV2zbjpKzrsQ+n1G6poVbErQxJ0LBOJXaKZ1EViLzH+hrLu9cdXI4zw9dBQJslwBEpbQ2P1oS7nDxs6jQ==}
     engines: {node: '>= 0.8.0'}
+
+  exponential-backoff@3.1.1:
+    resolution: {integrity: sha512-dX7e/LHVJ6W3DE1MHWi9S1EYzDESENfLrYohG2G++ovZrYOkm4Knwa0mc1cn84xJOR4KEU0WSchhLbd0UklbHw==}
 
   express-openapi-validator@5.2.0:
     resolution: {integrity: sha512-7YMLsnC9MfeCa/nb2YnAxxRKGzkZ6GucjCcZc+IZU6AHq0TZ3vLOGhXT+uqMV3QiCJWy0XdzQtrUBwGD8eBEaQ==}
@@ -4567,9 +4586,6 @@ packages:
   undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
 
-  undici-types@6.11.1:
-    resolution: {integrity: sha512-mIDEX2ek50x0OlRgxryxsenE5XaQD4on5U2inY7RApK3SOJpofyw7uW2AyfMKkhAxXIceo2DeWGVGwyvng1GNQ==}
-
   undici@5.28.4:
     resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
     engines: {node: '>=14.0'}
@@ -6004,7 +6020,7 @@ snapshots:
 
   '@types/express-serve-static-core@4.19.5':
     dependencies:
-      '@types/node': 22.0.2
+      '@types/node': 20.14.13
       '@types/qs': 6.9.15
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -6061,10 +6077,6 @@ snapshots:
   '@types/node@20.14.13':
     dependencies:
       undici-types: 5.26.5
-
-  '@types/node@22.0.2':
-    dependencies:
-      undici-types: 6.11.1
 
   '@types/passport-jwt@4.0.1':
     dependencies:
@@ -7212,6 +7224,8 @@ snapshots:
       strip-final-newline: 2.0.0
 
   exit@0.1.2: {}
+
+  exponential-backoff@3.1.1: {}
 
   express-openapi-validator@5.2.0(express@4.19.2):
     dependencies:
@@ -9489,8 +9503,6 @@ snapshots:
       which-boxed-primitive: 1.0.2
 
   undici-types@5.26.5: {}
-
-  undici-types@6.11.1: {}
 
   undici@5.28.4:
     dependencies:
