@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #app {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#app form input[type=text] {
+    text-indent: 8px;
+}
+
+#app .blockquote {
+    margin: 0 0 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    max-width: 24rem;
+}
+
+#app .blockquote>:last-child {
+    margin-bottom: 0;
+}
+
+#app p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+#app .lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+#app .lead .text-bg-warning.p-1 {
+    transform: skewY(-3deg);
+    display: inline-block;
+    font-weight: bold;
+    background: #F0C97D;
+}
