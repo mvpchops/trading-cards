@@ -10,7 +10,7 @@
     "clean": "rm -rf dist",
     "check": "npx @biomejs/biome check --write ./src",
     "start": "node ./dist/index.js",
-    "start:dev": "nodemon ./dist/index.js",
+    "start:dev": "NODE_ENV=development nodemon ./dist/index.js",
     "start:test": "NODE_ENV=test node ./dist/index.js"
   },
   "keywords": [],
