@@ -1,0 +1,1598 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Trading Cards MVP API
+  description: |
+    A simple REST API for searching and listing trading game cards
+  license:
+    name: MIT
+servers:
+  - url: http://127.0.0.1:8889
+tags:
+  - name: Cards
+    description: Search and favorite trading game cards
+  - name: Users
+    description: Create & authenticate users
+paths:
+  /:
+    get:
+      summary: API Home
+      description: The home endpoint for this API. Displays basic informational message
+      operationId: apiHome
+      responses:
+        '200':
+          description: A basic informational message about the search cards API
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 500
+                    example: Welcome to the API backend for the trading game cards MVP
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+  /search:
+    get:
+      summary: List Cards
+      description: Search for, and list trading game cards that match a search term
+      operationId: searchCards
+      tags:
+        - Cards
+      parameters:
+        - in: query
+          name: term
+          description: The search term to find cards with
+          required: true
+          schema:
+            type: string
+            maxLength: 50
+            minLength: 3
+            example: pokey
+        - in: query
+          name: orderby
+          description: On what property to order the matching cards. Default is `name`
+          required: false
+          schema:
+            type: string
+            enum:
+              - name
+              - released
+            default: name
+            example: name
+        - in: query
+          name: sortdir
+          required: false
+          description: |
+            The sort order of the returned cards. Default is `AUTO` Sort order:
+              * `ASC` - Ascending, from A to Z
+              * `DESC` - Descending, from Z to A
+              * `AUTO` - Allow the system choose the most inuitive direction to sort.
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+              - AUTO
+            default: AUTO
+            example: AUTO
+        - in: query
+          name: page
+          description: The page of the matching resultset to return. Default is `1`.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            example: 1
+            default: 1
+      responses:
+        '200':
+          description: A paged list of cards matching the search term
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    required:
+                      - total
+                      - data
+                    properties:
+                      total:
+                        type: integer
+                        description: The total number of cards matching the search query
+                      data:
+                        type: array
+                        maxItems: 175
+                        minItems: 0
+                        items:
+                          type: object
+                          required:
+                            - id
+                            - uri
+                            - name
+                            - lang
+                            - prices
+                            - foil
+                            - rarity
+                            - nonfoil
+                            - set_name
+                            - image_uris
+                            - released_at
+                          properties:
+                            id:
+                              type: string
+                              example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+                            lang:
+                              type: string
+                              maxLength: 5
+                              example: en
+                            name:
+                              type: string
+                              example: Aerial Predation
+                            uri:
+                              type: string
+                              example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+                            rarity:
+                              type: string
+                              example: rare
+                            set_name:
+                              type: string
+                              example: Modern Horizons
+                            collector_number:
+                              type: number
+                              example: 186
+                            released_at:
+                              type: string
+                              format: date
+                              example: 2021-06-18T00:00:00.000Z
+                            games:
+                              type: array
+                              items:
+                                type: string
+                                example: mtgo
+                            image_uris:
+                              type: object
+                              properties:
+                                small:
+                                  type: string
+                                  format: uri
+                                  example: https://placehold.co/146x204?text=No+Image
+                                normal:
+                                  type: string
+                                  format: uri
+                                  example: https://placehold.co/488x680?text=No+Image
+                                large:
+                                  type: string
+                                  format: uri
+                                  example: https://placehold.co/666x927?text=No+Image
+                            nonfoil:
+                              type: boolean
+                            foil:
+                              type: boolean
+                            prices:
+                              type: object
+                              properties:
+                                usd:
+                                  type: string
+                                  example: '0.25'
+                                eur:
+                                  type: string
+                                  example: '0.10'
+                        description: A page of the cards matching the search query
+                  - type: object
+                    properties:
+                      next:
+                        type: string
+                        description: A link to the next page of responses if one exists
+                        example: /search?term=red&page=3
+                      previous:
+                        type: string
+                        description: A link to the previous page of responses if one exists
+                        example: /search?term=red&page=1
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+  /users:
+    post:
+      summary: Create a user
+      description: Add a new user with their unique nickname and password
+      operationId: createUser
+      tags:
+        - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nickname
+                - password
+              properties:
+                nickname:
+                  type: string
+                  minLength: 5
+                  maxLength: 20
+                password:
+                  type: string
+                  minLength: 5
+                  maxLength: 75
+      responses:
+        '201':
+          description: A new user object
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                properties:
+                  id:
+                    type: string
+                    minLength: 20
+                    maxLength: 75
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+  /users/me:
+    get:
+      summary: Get the current user
+      description: Get a currently authenticated user
+      operationId: getCurrentUser
+      tags:
+        - Users
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A new user object
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - nickname
+                properties:
+                  id:
+                    type: string
+                    minLength: 20
+                    maxLength: 75
+                  nickname:
+                    type: string
+                    minLength: 5
+                    maxLength: 20
+                  favorites:
+                    type: array
+                    description: A list of cardsmarked as favorites by this user
+                    minItems: 0
+                    maxItems: 500
+                    items:
+                      type: string
+                      format: uuid
+                      example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+  /users/{userId}/favorites:
+    patch:
+      summary: Add a card to a user's favorites
+      description: >-
+        Add a card to a user's favorites. If the card is already in the user's
+        favorites, this operation will be ignored.
+      operationId: addToFavorites
+      tags:
+        - Users
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          description: The ID of a user to retrieve
+          required: true
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 75
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - card
+              properties:
+                card:
+                  type: string
+                  format: uuid
+                  example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+      responses:
+        '204':
+          description: Added card to favorites
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+    delete:
+      summary: Remove a card from a user's favorites
+      description: >-
+        Remove a card from a user's favorites. If the card is not in the user's
+        favorites, this operation will be ignored.
+      operationId: removeFromFavorites
+      tags:
+        - Users
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          description: The ID of a user to retrieve
+          required: true
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 75
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - card
+              properties:
+                card:
+                  type: string
+                  format: uuid
+                  example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+      responses:
+        '204':
+          description: Removed card from favorites
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+  /authenticate:
+    post:
+      summary: Authenticate a user
+      description: Authenticate a user with their nickname and password
+      operationId: authenticate
+      tags:
+        - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nickname
+                - password
+              properties:
+                nickname:
+                  type: string
+                  minLength: 5
+                  maxLength: 20
+                password:
+                  type: string
+                  minLength: 5
+                  maxLength: 75
+      responses:
+        '200':
+          description: A list of cards marked as favorite by a user
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - token
+                properties:
+                  token:
+                    type: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    maxLength: 150
+                    description: The error message from the server
+                  code:
+                    type: integer
+                    minimum: 400
+                    maximum: 599
+                    pattern: ^\d{3,3}$
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                        path:
+                          type: string
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    userId:
+      in: path
+      name: userId
+      description: The ID of a user to retrieve
+      required: true
+      schema:
+        type: string
+        minLength: 20
+        maxLength: 75
+    searchTerm:
+      in: query
+      name: term
+      description: The search term to find cards with
+      required: true
+      schema:
+        type: string
+        maxLength: 50
+        minLength: 3
+        example: pokey
+    orderBy:
+      in: query
+      name: orderby
+      description: On what property to order the matching cards. Default is `name`
+      required: false
+      schema:
+        type: string
+        enum:
+          - name
+          - released
+        default: name
+        example: name
+    sortDir:
+      in: query
+      name: sortdir
+      required: false
+      description: |
+        The sort order of the returned cards. Default is `AUTO` Sort order:
+          * `ASC` - Ascending, from A to Z
+          * `DESC` - Descending, from Z to A
+          * `AUTO` - Allow the system choose the most inuitive direction to sort.
+      schema:
+        type: string
+        enum:
+          - ASC
+          - DESC
+          - AUTO
+        default: AUTO
+        example: AUTO
+    page:
+      in: query
+      name: page
+      description: The page of the matching resultset to return. Default is `1`.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        example: 1
+        default: 1
+    tempPath:
+      in: path
+      name: mypath
+      required: true
+      schema:
+        type: string
+  schemas:
+    PageParam:
+      type: integer
+      minimum: 1
+      maximum: 50
+      example: 1
+      default: 1
+    SearchTermParam:
+      type: string
+      maxLength: 50
+      minLength: 3
+      example: pokey
+    OrderByParam:
+      type: string
+      enum:
+        - name
+        - released
+      default: name
+      example: name
+    SortDirParam:
+      type: string
+      enum:
+        - ASC
+        - DESC
+        - AUTO
+      default: AUTO
+      example: AUTO
+    APIWelcome:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          maxLength: 500
+          example: Welcome to the API backend for the trading game cards MVP
+    CardImageURIs:
+      type: object
+      properties:
+        small:
+          type: string
+          format: uri
+          example: https://placehold.co/146x204?text=No+Image
+        normal:
+          type: string
+          format: uri
+          example: https://placehold.co/488x680?text=No+Image
+        large:
+          type: string
+          format: uri
+          example: https://placehold.co/666x927?text=No+Image
+    CardPrices:
+      type: object
+      properties:
+        usd:
+          type: string
+          example: '0.25'
+        eur:
+          type: string
+          example: '0.10'
+    Card:
+      type: object
+      required:
+        - id
+        - uri
+        - name
+        - lang
+        - prices
+        - foil
+        - rarity
+        - nonfoil
+        - set_name
+        - image_uris
+        - released_at
+      properties:
+        id:
+          type: string
+          example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+        lang:
+          type: string
+          maxLength: 5
+          example: en
+        name:
+          type: string
+          example: Aerial Predation
+        uri:
+          type: string
+          example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+        rarity:
+          type: string
+          example: rare
+        set_name:
+          type: string
+          example: Modern Horizons
+        collector_number:
+          type: number
+          example: 186
+        released_at:
+          type: string
+          format: date
+          example: 2021-06-18T00:00:00.000Z
+        games:
+          type: array
+          items:
+            type: string
+            example: mtgo
+        image_uris:
+          type: object
+          properties:
+            small:
+              type: string
+              format: uri
+              example: https://placehold.co/146x204?text=No+Image
+            normal:
+              type: string
+              format: uri
+              example: https://placehold.co/488x680?text=No+Image
+            large:
+              type: string
+              format: uri
+              example: https://placehold.co/666x927?text=No+Image
+        nonfoil:
+          type: boolean
+        foil:
+          type: boolean
+        prices:
+          type: object
+          properties:
+            usd:
+              type: string
+              example: '0.25'
+            eur:
+              type: string
+              example: '0.10'
+    Pagination:
+      type: object
+      properties:
+        next:
+          type: string
+          description: A link to the next page of responses if one exists
+          example: /search?term=red&page=3
+        previous:
+          type: string
+          description: A link to the previous page of responses if one exists
+          example: /search?term=red&page=1
+    QueryResult:
+      type: object
+      required:
+        - total
+        - data
+      properties:
+        total:
+          type: integer
+          description: The total number of cards matching the search query
+        data:
+          type: array
+          maxItems: 175
+          minItems: 0
+          items:
+            type: object
+            required:
+              - id
+              - uri
+              - name
+              - lang
+              - prices
+              - foil
+              - rarity
+              - nonfoil
+              - set_name
+              - image_uris
+              - released_at
+            properties:
+              id:
+                type: string
+                example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+              lang:
+                type: string
+                maxLength: 5
+                example: en
+              name:
+                type: string
+                example: Aerial Predation
+              uri:
+                type: string
+                example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+              rarity:
+                type: string
+                example: rare
+              set_name:
+                type: string
+                example: Modern Horizons
+              collector_number:
+                type: number
+                example: 186
+              released_at:
+                type: string
+                format: date
+                example: 2021-06-18T00:00:00.000Z
+              games:
+                type: array
+                items:
+                  type: string
+                  example: mtgo
+              image_uris:
+                type: object
+                properties:
+                  small:
+                    type: string
+                    format: uri
+                    example: https://placehold.co/146x204?text=No+Image
+                  normal:
+                    type: string
+                    format: uri
+                    example: https://placehold.co/488x680?text=No+Image
+                  large:
+                    type: string
+                    format: uri
+                    example: https://placehold.co/666x927?text=No+Image
+              nonfoil:
+                type: boolean
+              foil:
+                type: boolean
+              prices:
+                type: object
+                properties:
+                  usd:
+                    type: string
+                    example: '0.25'
+                  eur:
+                    type: string
+                    example: '0.10'
+          description: A page of the cards matching the search query
+    CardsQueryResponse:
+      allOf:
+        - type: object
+          required:
+            - total
+            - data
+          properties:
+            total:
+              type: integer
+              description: The total number of cards matching the search query
+            data:
+              type: array
+              maxItems: 175
+              minItems: 0
+              items:
+                type: object
+                required:
+                  - id
+                  - uri
+                  - name
+                  - lang
+                  - prices
+                  - foil
+                  - rarity
+                  - nonfoil
+                  - set_name
+                  - image_uris
+                  - released_at
+                properties:
+                  id:
+                    type: string
+                    example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+                  lang:
+                    type: string
+                    maxLength: 5
+                    example: en
+                  name:
+                    type: string
+                    example: Aerial Predation
+                  uri:
+                    type: string
+                    example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+                  rarity:
+                    type: string
+                    example: rare
+                  set_name:
+                    type: string
+                    example: Modern Horizons
+                  collector_number:
+                    type: number
+                    example: 186
+                  released_at:
+                    type: string
+                    format: date
+                    example: 2021-06-18T00:00:00.000Z
+                  games:
+                    type: array
+                    items:
+                      type: string
+                      example: mtgo
+                  image_uris:
+                    type: object
+                    properties:
+                      small:
+                        type: string
+                        format: uri
+                        example: https://placehold.co/146x204?text=No+Image
+                      normal:
+                        type: string
+                        format: uri
+                        example: https://placehold.co/488x680?text=No+Image
+                      large:
+                        type: string
+                        format: uri
+                        example: https://placehold.co/666x927?text=No+Image
+                  nonfoil:
+                    type: boolean
+                  foil:
+                    type: boolean
+                  prices:
+                    type: object
+                    properties:
+                      usd:
+                        type: string
+                        example: '0.25'
+                      eur:
+                        type: string
+                        example: '0.10'
+              description: A page of the cards matching the search query
+        - type: object
+          properties:
+            next:
+              type: string
+              description: A link to the next page of responses if one exists
+              example: /search?term=red&page=3
+            previous:
+              type: string
+              description: A link to the previous page of responses if one exists
+              example: /search?term=red&page=1
+    FavCard:
+      type: string
+      format: uuid
+      example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+    Nickname:
+      type: string
+      minLength: 5
+      maxLength: 20
+    UserId:
+      type: string
+      minLength: 20
+      maxLength: 75
+    UserDto:
+      type: object
+      required:
+        - id
+        - nickname
+      properties:
+        id:
+          type: string
+          minLength: 20
+          maxLength: 75
+        nickname:
+          type: string
+          minLength: 5
+          maxLength: 20
+        favorites:
+          type: array
+          description: A list of cardsmarked as favorites by this user
+          minItems: 0
+          maxItems: 500
+          items:
+            type: string
+            format: uuid
+            example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+    UserCreatedDto:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          minLength: 20
+          maxLength: 75
+    CreateUserDto:
+      type: object
+      required:
+        - nickname
+        - password
+      properties:
+        nickname:
+          type: string
+          minLength: 5
+          maxLength: 20
+        password:
+          type: string
+          minLength: 5
+          maxLength: 75
+    LoginAttempt:
+      type: object
+      required:
+        - nickname
+        - password
+      properties:
+        nickname:
+          type: string
+          minLength: 5
+          maxLength: 20
+        password:
+          type: string
+          minLength: 5
+          maxLength: 75
+    AuthToken:
+      type: object
+      required:
+        - token
+      properties:
+        token:
+          type: string
+    FavCardDto:
+      type: object
+      required:
+        - card
+      properties:
+        card:
+          type: string
+          format: uuid
+          example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+    APIError:
+      type: object
+      properties:
+        message:
+          type: string
+        path:
+          type: string
+    APIResponseError:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          maxLength: 150
+          description: The error message from the server
+        code:
+          type: integer
+          minimum: 400
+          maximum: 599
+          pattern: ^\d{3,3}$
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              path:
+                type: string
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                maxLength: 150
+                description: The error message from the server
+              code:
+                type: integer
+                minimum: 400
+                maximum: 599
+                pattern: ^\d{3,3}$
+              errors:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                    path:
+                      type: string
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                maxLength: 150
+                description: The error message from the server
+              code:
+                type: integer
+                minimum: 400
+                maximum: 599
+                pattern: ^\d{3,3}$
+              errors:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                    path:
+                      type: string
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                maxLength: 150
+                description: The error message from the server
+              code:
+                type: integer
+                minimum: 400
+                maximum: 599
+                pattern: ^\d{3,3}$
+              errors:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                    path:
+                      type: string
+    TooManyRequests:
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                maxLength: 150
+                description: The error message from the server
+              code:
+                type: integer
+                minimum: 400
+                maximum: 599
+                pattern: ^\d{3,3}$
+              errors:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                    path:
+                      type: string
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                maxLength: 150
+                description: The error message from the server
+              code:
+                type: integer
+                minimum: 400
+                maximum: 599
+                pattern: ^\d{3,3}$
+              errors:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                    path:
+                      type: string

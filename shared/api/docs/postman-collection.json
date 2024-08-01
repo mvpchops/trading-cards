@@ -1,0 +1,1856 @@
+{
+    "item": [
+        {
+            "name": "Cards",
+            "description": "Search and favorite trading game cards",
+            "item": [
+                {
+                    "id": "5bb38ee2-0d29-458b-811d-478ebc541b50",
+                    "name": "Search Cards",
+                    "request": {
+                        "name": "Search Cards",
+                        "description": {
+                            "content": "Search for, and list trading game cards that match a search term",
+                            "type": "text/plain"
+                        },
+                        "url": {
+                            "path": [
+                                "search"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "(Required) The search term to find cards with",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "term",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "On what property to order the matching cards. Default is `name`",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "orderby",
+                                    "value": "name"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "The sort order of the returned cards. Default is `AUTO` Sort order:\n  * `ASC` - Ascending, from A to Z\n  * `DESC` - Descending, from Z to A\n  * `AUTO` - Allow the system choose the most inuitive direction to sort.\n",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "sortdir",
+                                    "value": "AUTO"
+                                },
+                                {
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "The page of the matching resultset to return. Default is `1`.",
+                                        "type": "text/plain"
+                                    },
+                                    "key": "page",
+                                    "value": "1"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {},
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "032e0019-ebf6-4634-96e9-cfc200dc4061",
+                            "name": "A paged list of cards matching the search term",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "search"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "(Required) The search term to find cards with",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "term",
+                                            "value": "<string>"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "On what property to order the matching cards. Default is `name`",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "orderby",
+                                            "value": "name"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "The sort order of the returned cards. Default is `AUTO` Sort order:\n  * `ASC` - Ascending, from A to Z\n  * `DESC` - Descending, from Z to A\n  * `AUTO` - Allow the system choose the most inuitive direction to sort.\n",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "sortdir",
+                                            "value": "AUTO"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "The page of the matching resultset to return. Default is `1`.",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "page",
+                                            "value": "1"
+                                        }
+                                    ],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"uri\": \"<string>\",\n      \"name\": \"<string>\",\n      \"lang\": \"<string>\",\n      \"prices\": {\n        \"usd\": \"<string>\",\n        \"eur\": \"<string>\"\n      },\n      \"foil\": \"<boolean>\",\n      \"rarity\": \"<string>\",\n      \"nonfoil\": \"<boolean>\",\n      \"set_name\": \"<string>\",\n      \"image_uris\": {\n        \"small\": \"<uri>\",\n        \"normal\": \"<uri>\",\n        \"large\": \"<uri>\"\n      },\n      \"released_at\": \"<date>\",\n      \"collector_number\": \"<number>\",\n      \"games\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "654a46d9-f82f-4956-b1c5-2a9e551bbfcd",
+                            "name": "Bad request",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "search"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "(Required) The search term to find cards with",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "term",
+                                            "value": "<string>"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "On what property to order the matching cards. Default is `name`",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "orderby",
+                                            "value": "name"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "The sort order of the returned cards. Default is `AUTO` Sort order:\n  * `ASC` - Ascending, from A to Z\n  * `DESC` - Descending, from Z to A\n  * `AUTO` - Allow the system choose the most inuitive direction to sort.\n",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "sortdir",
+                                            "value": "AUTO"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "The page of the matching resultset to return. Default is `1`.",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "page",
+                                            "value": "1"
+                                        }
+                                    ],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "f3abbb65-1831-44a5-8348-cb5d9aa81829",
+                            "name": "Too many requests",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "search"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "(Required) The search term to find cards with",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "term",
+                                            "value": "<string>"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "On what property to order the matching cards. Default is `name`",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "orderby",
+                                            "value": "name"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "The sort order of the returned cards. Default is `AUTO` Sort order:\n  * `ASC` - Ascending, from A to Z\n  * `DESC` - Descending, from Z to A\n  * `AUTO` - Allow the system choose the most inuitive direction to sort.\n",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "sortdir",
+                                            "value": "AUTO"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "The page of the matching resultset to return. Default is `1`.",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "page",
+                                            "value": "1"
+                                        }
+                                    ],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "Too Many Requests",
+                            "code": 429,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "8b28ff88-8255-413f-824b-3d32f97edc7b",
+                            "name": "Internal server error",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "search"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "(Required) The search term to find cards with",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "term",
+                                            "value": "<string>"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "On what property to order the matching cards. Default is `name`",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "orderby",
+                                            "value": "name"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "The sort order of the returned cards. Default is `AUTO` Sort order:\n  * `ASC` - Ascending, from A to Z\n  * `DESC` - Descending, from Z to A\n  * `AUTO` - Allow the system choose the most inuitive direction to sort.\n",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "sortdir",
+                                            "value": "AUTO"
+                                        },
+                                        {
+                                            "disabled": false,
+                                            "description": {
+                                                "content": "The page of the matching resultset to return. Default is `1`.",
+                                                "type": "text/plain"
+                                            },
+                                            "key": "page",
+                                            "value": "1"
+                                        }
+                                    ],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "Internal Server Error",
+                            "code": 500,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "description": "Create & authenticate users",
+            "item": [
+                {
+                    "id": "a8b358c4-0a96-4f4c-a381-3d42e3f68463",
+                    "name": "Create a user",
+                    "request": {
+                        "name": "Create a user",
+                        "description": {
+                            "content": "Add a new user with their unique nickname and password",
+                            "type": "text/plain"
+                        },
+                        "url": {
+                            "path": [
+                                "users"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nickname\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                            "options": {
+                                "raw": {
+                                    "headerFamily": "json",
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "c4d05432-74c6-48e8-999c-aa0a2265f1fc",
+                            "name": "The newly created user",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"nickname\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Created",
+                            "code": 201,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"id\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "b0e41a8b-5a11-432c-8998-3146e40bf942",
+                            "name": "Bad request",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"nickname\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "3d87ce4c-4b26-4468-ac01-3614ca170322",
+                            "name": "Too many requests",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"nickname\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Too Many Requests",
+                            "code": 429,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "6d0cfcea-2521-4a6f-9394-163f107ba59f",
+                            "name": "Internal server error",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"nickname\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Internal Server Error",
+                            "code": 500,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                },
+                {
+                    "id": "4e523825-1473-4c9a-9d49-fc8e6cd46597",
+                    "name": "Get the current user",
+                    "request": {
+                        "name": "Get the current user",
+                        "description": {
+                            "content": "Get the currently authenticated user",
+                            "type": "text/plain"
+                        },
+                        "url": {
+                            "path": [
+                                "users",
+                                "me"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {},
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{bearerToken}}"
+                                }
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "id": "c3a9ec6b-c75d-45df-8879-0a30f7e86451",
+                            "name": "The authenticated user",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        "me"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"id\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"favorites\": [\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "8065ef09-a733-4eb5-8665-a1d7711b36f7",
+                            "name": "Bad request",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        "me"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "5c456bea-8d23-4a3b-b768-05c671947425",
+                            "name": "Too many requests",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        "me"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "Too Many Requests",
+                            "code": 429,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "24d57ad6-a08b-43e6-8ba8-7147c3f84ceb",
+                            "name": "Internal server error",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        "me"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {}
+                            },
+                            "status": "Internal Server Error",
+                            "code": 500,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                },
+                {
+                    "id": "9b61e5ec-64e0-4fec-81cf-771ec3dd0c17",
+                    "name": "Add a card to a user's favorites",
+                    "request": {
+                        "name": "Add a card to a user's favorites",
+                        "description": {
+                            "content": "Add a card to a user's favorites. If the card is already in the user's favorites, this operation will be ignored.",
+                            "type": "text/plain"
+                        },
+                        "url": {
+                            "path": [
+                                "users",
+                                ":userId",
+                                "favorites"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": [
+                                {
+                                    "type": "any",
+                                    "value": "<string>",
+                                    "key": "userId",
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "(Required) The ID of a user to retrieve",
+                                        "type": "text/plain"
+                                    }
+                                }
+                            ]
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "PATCH",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"card\": \"<uuid>\"\n}",
+                            "options": {
+                                "raw": {
+                                    "headerFamily": "json",
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{bearerToken}}"
+                                }
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "id": "898d0a5b-0e93-4cf3-8bea-60f6e19b781f",
+                            "name": "The card was added to the user's favorites",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        ":userId",
+                                        "favorites"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "PATCH",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"card\": \"<uuid>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "No Content",
+                            "code": 204,
+                            "header": [],
+                            "cookie": [],
+                            "_postman_previewlanguage": "text"
+                        },
+                        {
+                            "id": "88b3d289-af47-44f0-ba1b-1220278deb49",
+                            "name": "Bad request",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        ":userId",
+                                        "favorites"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "PATCH",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"card\": \"<uuid>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "f800e60f-3998-4436-91f4-c2920d99d546",
+                            "name": "Too many requests",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        ":userId",
+                                        "favorites"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "PATCH",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"card\": \"<uuid>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Too Many Requests",
+                            "code": 429,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "dda371d3-9631-42de-8e6d-e5640142eaa8",
+                            "name": "Internal server error",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        ":userId",
+                                        "favorites"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "PATCH",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"card\": \"<uuid>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Internal Server Error",
+                            "code": 500,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                },
+                {
+                    "id": "87719fa9-ed47-456d-bd88-6af2bfd0974b",
+                    "name": "Remove a card from a user's favorites",
+                    "request": {
+                        "name": "Remove a card from a user's favorites",
+                        "description": {
+                            "content": "Remove a card from a user's favorites. If the card is not in the user's favorites, this operation will be ignored.",
+                            "type": "text/plain"
+                        },
+                        "url": {
+                            "path": [
+                                "users",
+                                ":userId",
+                                "favorites"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": [
+                                {
+                                    "type": "any",
+                                    "value": "<string>",
+                                    "key": "userId",
+                                    "disabled": false,
+                                    "description": {
+                                        "content": "(Required) The ID of a user to retrieve",
+                                        "type": "text/plain"
+                                    }
+                                }
+                            ]
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "DELETE",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"card\": \"<uuid>\"\n}",
+                            "options": {
+                                "raw": {
+                                    "headerFamily": "json",
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{bearerToken}}"
+                                }
+                            ]
+                        }
+                    },
+                    "response": [
+                        {
+                            "id": "8105b71f-c672-47c8-8580-4f0d4462c8ad",
+                            "name": "The card was removed from the user's favorites",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        ":userId",
+                                        "favorites"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "DELETE",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"card\": \"<uuid>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "No Content",
+                            "code": 204,
+                            "header": [],
+                            "cookie": [],
+                            "_postman_previewlanguage": "text"
+                        },
+                        {
+                            "id": "d04bd564-3a23-4f35-bb82-ec49225c3595",
+                            "name": "Bad request",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        ":userId",
+                                        "favorites"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "DELETE",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"card\": \"<uuid>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "5936a72f-7b66-4064-b569-d6be3454eaca",
+                            "name": "Too many requests",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        ":userId",
+                                        "favorites"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "DELETE",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"card\": \"<uuid>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Too Many Requests",
+                            "code": 429,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "2a4809ec-a788-4de2-8d41-f359cfc235c4",
+                            "name": "Internal server error",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        ":userId",
+                                        "favorites"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "description": {
+                                            "content": "Added as a part of security scheme: bearer",
+                                            "type": "text/plain"
+                                        },
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                    }
+                                ],
+                                "method": "DELETE",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"card\": \"<uuid>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Internal Server Error",
+                            "code": 500,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                },
+                {
+                    "id": "dd2b7c4c-d58c-40d8-bb2c-7d294bd32a17",
+                    "name": "Authenticate a user",
+                    "request": {
+                        "name": "Authenticate a user",
+                        "description": {
+                            "content": "Authenticate a user with their nickname and password",
+                            "type": "text/plain"
+                        },
+                        "url": {
+                            "path": [
+                                "authenticate"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nickname\": \"<string>\",\n  \"password\": \"<string>\",\n  \"createUser\": false\n}",
+                            "options": {
+                                "raw": {
+                                    "headerFamily": "json",
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "auth": null
+                    },
+                    "response": [
+                        {
+                            "id": "98fc258e-8b8d-4eb7-89a2-5938cb464218",
+                            "name": "A JWT for the authenticated user",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "authenticate"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"nickname\": \"<string>\",\n  \"password\": \"<string>\",\n  \"createUser\": false\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"token\": \"<string>\"\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "9a66d75a-a6bd-450f-8590-3a142abef20b",
+                            "name": "Bad request",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "authenticate"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"nickname\": \"<string>\",\n  \"password\": \"<string>\",\n  \"createUser\": false\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Bad Request",
+                            "code": 400,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "a531761d-8293-4daf-ab9b-56a9cad69cd8",
+                            "name": "Too many requests",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "authenticate"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"nickname\": \"<string>\",\n  \"password\": \"<string>\",\n  \"createUser\": false\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Too Many Requests",
+                            "code": 429,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        },
+                        {
+                            "id": "6ddc23b4-2ab9-4a1f-a667-e7da9ba37b6b",
+                            "name": "Internal server error",
+                            "originalRequest": {
+                                "url": {
+                                    "path": [
+                                        "authenticate"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"nickname\": \"<string>\",\n  \"password\": \"<string>\",\n  \"createUser\": false\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                }
+                            },
+                            "status": "Internal Server Error",
+                            "code": 500,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                }
+                            ],
+                            "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                            "cookie": [],
+                            "_postman_previewlanguage": "json"
+                        }
+                    ],
+                    "event": [],
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    }
+                }
+            ]
+        },
+        {
+            "id": "27ab2d8d-fa26-455b-92ce-d30d58b6b275",
+            "name": "API Home",
+            "request": {
+                "name": "API Home",
+                "description": {
+                    "content": "The home endpoint for this API. Displays basic informational message",
+                    "type": "text/plain"
+                },
+                "url": {
+                    "path": [
+                        ""
+                    ],
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                },
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "method": "GET",
+                "body": {},
+                "auth": null
+            },
+            "response": [
+                {
+                    "id": "bf414888-e37b-47f0-9742-d3421d2bc628",
+                    "name": "A basic informational message about the search cards API",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                ""
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "body": "{\n  \"message\": \"<string>\"\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                },
+                {
+                    "id": "3b816334-e18d-461d-b8c4-0b0aab4e0a09",
+                    "name": "Bad request",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                ""
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                    },
+                    "status": "Bad Request",
+                    "code": 400,
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                },
+                {
+                    "id": "eece1a43-aabe-466f-aac5-f170f7afd671",
+                    "name": "Too many requests",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                ""
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                    },
+                    "status": "Too Many Requests",
+                    "code": 429,
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                },
+                {
+                    "id": "de1e257e-e6e6-4ea8-ad45-0653d4afea7d",
+                    "name": "Internal server error",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                ""
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "method": "GET",
+                        "body": {}
+                    },
+                    "status": "Internal Server Error",
+                    "code": 500,
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "body": "{\n  \"message\": \"<string>\",\n  \"code\": 669,\n  \"errors\": [\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\",\n      \"path\": \"<string>\"\n    }\n  ]\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                }
+            ],
+            "event": [],
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            }
+        }
+    ],
+    "event": [],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://127.0.0.1:8889"
+        }
+    ],
+    "info": {
+        "_postman_id": "6209e0b7-6efb-41e3-895d-d5868d827e1a",
+        "name": "Trading Cards MVP API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": {
+            "content": "A simple REST API for searching and listing trading game cards\n",
+            "type": "text/plain"
+        }
+    }
+}

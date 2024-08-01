@@ -1,0 +1,703 @@
+version: "1.0"
+name: Trading Cards MVP API
+config:
+  http:
+    baseURL: http://127.0.0.1:8889
+tests:
+  default:
+    name: Default
+    steps:
+      - id: apiHome
+        name: API Home
+        http:
+          url: /
+          method: GET
+          check:
+            status: 200
+            schema:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  maxLength: 500
+                  example: Welcome to the API backend for the trading game cards MVP
+  
+  Users:
+    name: Create & authenticate users
+    steps:
+      - id: createUser
+        name: Create a user
+        http:
+          url: /users
+          method: POST
+          headers:
+            Content-Type: application/json
+            accept: application/json
+          json:
+            nickname: incididu
+            password: eXdoloreD0l0r3e
+          check:
+            status: 201
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  minLength: 20
+                  maxLength: 75
+      - id: authenticate
+        name: Authenticate a user
+        http:
+          url: /authenticate
+          method: POST
+          headers:
+            Content-Type: application/json
+            accept: application/json
+          json:
+            nickname: incididu
+            password: eXdoloreD0l0r3e
+          captures:
+            authToken:
+              jsonpath: $.token
+          check:
+            status: 200
+            schema:
+              type: object
+              required:
+                - token
+              properties:
+                token:
+                  type: string
+      - id: getCurrentUser
+        name: Get the current user
+        http:
+          url: /users/me
+          method: GET
+          auth:
+            bearer:
+              token: ${{captures.authToken}}
+          check:
+            status: 200
+            schema:
+              type: object
+              required:
+                - id
+                - nickname
+              properties:
+                id:
+                  type: string
+                  minLength: 20
+                  maxLength: 75
+                nickname:
+                  type: string
+                  minLength: 5
+                  maxLength: 20
+                favorites:
+                  type: array
+                  description: A list of cardsmarked as favorites by this user
+                  minItems: 0
+                  maxItems: 500
+                  items:
+                    type: string
+                    format: uuid
+                    example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+      - id: addToFavorites
+        name: Add a card to a user's favorites
+        http:
+          url: /users/cillum dolor labore est/favorites
+          method: PATCH
+          auth:
+            bearer:
+              token: ${{captures.authToken}}
+          headers:
+            Content-Type: application/json
+            accept: application/json
+          json:
+            card: 06478671-56ad-c4a0-2f2a-bc19f1a200bf
+          check:
+            status: 204
+      - id: removeFromFavorites
+        name: Remove a card from a user's favorites
+        http:
+          url: /users/consectetur officia sed aute proident/favorites
+          method: DELETE
+          auth:
+            bearer:
+              token: ${{captures.authToken}}
+          headers:
+            Content-Type: application/json
+            accept: application/json
+          json:
+            card: 7f63e90d-ea33-e2a0-8a34-89fea606eb05
+          check:
+            status: 204
+  Cards:
+    name: Search and favorite trading game cards
+    steps:
+      - id: searchCards
+        name: List Cards
+        http:
+          url: /search
+          method: GET
+          params:
+            term: pokey
+            orderby: name
+            sortdir: AUTO
+            page: 1
+          check:
+            status: 200
+            schema:
+              allOf:
+                - type: object
+                  required:
+                    - total
+                    - data
+                  properties:
+                    total:
+                      type: integer
+                      description: The total number of cards matching the search query
+                    data:
+                      type: array
+                      maxItems: 175
+                      minItems: 0
+                      items:
+                        type: object
+                        required:
+                          - id
+                          - uri
+                          - name
+                          - lang
+                          - prices
+                          - foil
+                          - rarity
+                          - nonfoil
+                          - set_name
+                          - image_uris
+                          - released_at
+                        properties:
+                          id:
+                            type: string
+                            example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+                          lang:
+                            type: string
+                            maxLength: 5
+                            example: en
+                          name:
+                            type: string
+                            example: Aerial Predation
+                          uri:
+                            type: string
+                            example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+                          rarity:
+                            type: string
+                            example: rare
+                          set_name:
+                            type: string
+                            example: Modern Horizons
+                          collector_number:
+                            type: number
+                            example: 186
+                          released_at:
+                            type: string
+                            format: date
+                            example: 2021-06-18T00:00:00.000Z
+                          games:
+                            type: array
+                            items:
+                              type: string
+                              example: mtgo
+                          image_uris:
+                            type: object
+                            properties:
+                              small:
+                                type: string
+                                format: uri
+                                example: https://placehold.co/146x204?text=No+Image
+                              normal:
+                                type: string
+                                format: uri
+                                example: https://placehold.co/488x680?text=No+Image
+                              large:
+                                type: string
+                                format: uri
+                                example: https://placehold.co/666x927?text=No+Image
+                          nonfoil:
+                            type: boolean
+                          foil:
+                            type: boolean
+                          prices:
+                            type: object
+                            properties:
+                              usd:
+                                type: string
+                                example: "0.25"
+                              eur:
+                                type: string
+                                example: "0.10"
+                      description: A page of the cards matching the search query
+                - type: object
+                  properties:
+                    next:
+                      type: string
+                      description: A link to the next page of responses if one exists
+                      example: /search?term=red&page=3
+                    previous:
+                      type: string
+                      description: A link to the previous page of responses if one exists
+                      example: /search?term=red&page=1
+      
+components:
+  schemas:
+    PageParam:
+      type: integer
+      minimum: 1
+      maximum: 50
+      example: 1
+      default: 1
+    SearchTermParam:
+      type: string
+      maxLength: 50
+      minLength: 3
+      example: pokey
+    OrderByParam:
+      type: string
+      enum:
+        - name
+        - released
+      default: name
+      example: name
+    SortDirParam:
+      type: string
+      enum:
+        - ASC
+        - DESC
+        - AUTO
+      default: AUTO
+      example: AUTO
+    APIWelcome:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          maxLength: 500
+          example: Welcome to the API backend for the trading game cards MVP
+    CardImageURIs:
+      type: object
+      properties:
+        small:
+          type: string
+          format: uri
+          example: https://placehold.co/146x204?text=No+Image
+        normal:
+          type: string
+          format: uri
+          example: https://placehold.co/488x680?text=No+Image
+        large:
+          type: string
+          format: uri
+          example: https://placehold.co/666x927?text=No+Image
+    CardPrices:
+      type: object
+      properties:
+        usd:
+          type: string
+          example: "0.25"
+        eur:
+          type: string
+          example: "0.10"
+    Card:
+      type: object
+      required:
+        - id
+        - uri
+        - name
+        - lang
+        - prices
+        - foil
+        - rarity
+        - nonfoil
+        - set_name
+        - image_uris
+        - released_at
+      properties:
+        id:
+          type: string
+          example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+        lang:
+          type: string
+          maxLength: 5
+          example: en
+        name:
+          type: string
+          example: Aerial Predation
+        uri:
+          type: string
+          example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+        rarity:
+          type: string
+          example: rare
+        set_name:
+          type: string
+          example: Modern Horizons
+        collector_number:
+          type: number
+          example: 186
+        released_at:
+          type: string
+          format: date
+          example: 2021-06-18T00:00:00.000Z
+        games:
+          type: array
+          items:
+            type: string
+            example: mtgo
+        image_uris:
+          type: object
+          properties:
+            small:
+              type: string
+              format: uri
+              example: https://placehold.co/146x204?text=No+Image
+            normal:
+              type: string
+              format: uri
+              example: https://placehold.co/488x680?text=No+Image
+            large:
+              type: string
+              format: uri
+              example: https://placehold.co/666x927?text=No+Image
+        nonfoil:
+          type: boolean
+        foil:
+          type: boolean
+        prices:
+          type: object
+          properties:
+            usd:
+              type: string
+              example: "0.25"
+            eur:
+              type: string
+              example: "0.10"
+    Pagination:
+      type: object
+      properties:
+        next:
+          type: string
+          description: A link to the next page of responses if one exists
+          example: /search?term=red&page=3
+        previous:
+          type: string
+          description: A link to the previous page of responses if one exists
+          example: /search?term=red&page=1
+    QueryResult:
+      type: object
+      required:
+        - total
+        - data
+      properties:
+        total:
+          type: integer
+          description: The total number of cards matching the search query
+        data:
+          type: array
+          maxItems: 175
+          minItems: 0
+          items:
+            type: object
+            required:
+              - id
+              - uri
+              - name
+              - lang
+              - prices
+              - foil
+              - rarity
+              - nonfoil
+              - set_name
+              - image_uris
+              - released_at
+            properties:
+              id:
+                type: string
+                example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+              lang:
+                type: string
+                maxLength: 5
+                example: en
+              name:
+                type: string
+                example: Aerial Predation
+              uri:
+                type: string
+                example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+              rarity:
+                type: string
+                example: rare
+              set_name:
+                type: string
+                example: Modern Horizons
+              collector_number:
+                type: number
+                example: 186
+              released_at:
+                type: string
+                format: date
+                example: 2021-06-18T00:00:00.000Z
+              games:
+                type: array
+                items:
+                  type: string
+                  example: mtgo
+              image_uris:
+                type: object
+                properties:
+                  small:
+                    type: string
+                    format: uri
+                    example: https://placehold.co/146x204?text=No+Image
+                  normal:
+                    type: string
+                    format: uri
+                    example: https://placehold.co/488x680?text=No+Image
+                  large:
+                    type: string
+                    format: uri
+                    example: https://placehold.co/666x927?text=No+Image
+              nonfoil:
+                type: boolean
+              foil:
+                type: boolean
+              prices:
+                type: object
+                properties:
+                  usd:
+                    type: string
+                    example: "0.25"
+                  eur:
+                    type: string
+                    example: "0.10"
+          description: A page of the cards matching the search query
+    CardsQueryResponse:
+      allOf:
+        - type: object
+          required:
+            - total
+            - data
+          properties:
+            total:
+              type: integer
+              description: The total number of cards matching the search query
+            data:
+              type: array
+              maxItems: 175
+              minItems: 0
+              items:
+                type: object
+                required:
+                  - id
+                  - uri
+                  - name
+                  - lang
+                  - prices
+                  - foil
+                  - rarity
+                  - nonfoil
+                  - set_name
+                  - image_uris
+                  - released_at
+                properties:
+                  id:
+                    type: string
+                    example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+                  lang:
+                    type: string
+                    maxLength: 5
+                    example: en
+                  name:
+                    type: string
+                    example: Aerial Predation
+                  uri:
+                    type: string
+                    example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+                  rarity:
+                    type: string
+                    example: rare
+                  set_name:
+                    type: string
+                    example: Modern Horizons
+                  collector_number:
+                    type: number
+                    example: 186
+                  released_at:
+                    type: string
+                    format: date
+                    example: 2021-06-18T00:00:00.000Z
+                  games:
+                    type: array
+                    items:
+                      type: string
+                      example: mtgo
+                  image_uris:
+                    type: object
+                    properties:
+                      small:
+                        type: string
+                        format: uri
+                        example: https://placehold.co/146x204?text=No+Image
+                      normal:
+                        type: string
+                        format: uri
+                        example: https://placehold.co/488x680?text=No+Image
+                      large:
+                        type: string
+                        format: uri
+                        example: https://placehold.co/666x927?text=No+Image
+                  nonfoil:
+                    type: boolean
+                  foil:
+                    type: boolean
+                  prices:
+                    type: object
+                    properties:
+                      usd:
+                        type: string
+                        example: "0.25"
+                      eur:
+                        type: string
+                        example: "0.10"
+              description: A page of the cards matching the search query
+        - type: object
+          properties:
+            next:
+              type: string
+              description: A link to the next page of responses if one exists
+              example: /search?term=red&page=3
+            previous:
+              type: string
+              description: A link to the previous page of responses if one exists
+              example: /search?term=red&page=1
+    FavCard:
+      type: string
+      format: uuid
+      example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+    Nickname:
+      type: string
+      minLength: 5
+      maxLength: 20
+    UserId:
+      type: string
+      minLength: 20
+      maxLength: 75
+    UserDto:
+      type: object
+      required:
+        - id
+        - nickname
+      properties:
+        id:
+          type: string
+          minLength: 20
+          maxLength: 75
+        nickname:
+          type: string
+          minLength: 5
+          maxLength: 20
+        favorites:
+          type: array
+          description: A list of cardsmarked as favorites by this user
+          minItems: 0
+          maxItems: 500
+          items:
+            type: string
+            format: uuid
+            example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+    UserCreatedDto:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          minLength: 20
+          maxLength: 75
+    CreateUserDto:
+      type: object
+      required:
+        - nickname
+        - password
+      properties:
+        nickname:
+          type: string
+          minLength: 5
+          maxLength: 20
+        password:
+          type: string
+          minLength: 5
+          maxLength: 75
+    LoginAttempt:
+      type: object
+      required:
+        - nickname
+        - password
+      properties:
+        nickname:
+          type: string
+          minLength: 5
+          maxLength: 20
+        password:
+          type: string
+          minLength: 5
+          maxLength: 75
+    AuthToken:
+      type: object
+      required:
+        - token
+      properties:
+        token:
+          type: string
+    FavCardDto:
+      type: object
+      required:
+        - card
+      properties:
+        card:
+          type: string
+          format: uuid
+          example: d99a9a7d-d9ca-4c11-80ab-e39d5943a315
+    APIError:
+      type: object
+      properties:
+        message:
+          type: string
+        path:
+          type: string
+    APIResponseError:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          maxLength: 150
+          description: The error message from the server
+        code:
+          type: integer
+          minimum: 400
+          maximum: 599
+          pattern: ^\d{3,3}$
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              path:
+                type: string

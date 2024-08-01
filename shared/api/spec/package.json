@@ -1,0 +1,32 @@
+{
+  "name": "apispec",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "stepci run workflow.yml",
+    "clean": "rm -rf ../docs ../sdk/generated.ts",
+    "build": "pnpm models:gen && pnpm docs:gen && pnpm postman:gen",
+    "build:dev": "pnpm clean && pnpm models:gen && pnpm docs:gen && pnpm postman:gen",
+    "start:dev": "prism mock api.yaml",
+    "docs:gen": "redocly build-docs api.yaml -o ../docs/index.html",
+    "models:gen": "openapi-typescript api.yaml --export-type type --o ../sdk/generated.ts",
+    "tests:gen": "rm -rf api-derefed.yaml && node deref-api-spec.js && pnpm stepci generate api-derefed.yaml",
+    "postman:gen": "openapi2postmanv2 -s api.yaml -o ../docs/postman-collection.json -p -O folderStrategy=Tags"
+  },
+  "keywords": [],
+  "author": "MVP Chops <mvpchops@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@redocly/cli": "^1.11.0",
+    "@stoplight/prism-cli": "^5.7.0",
+    "@types/express-serve-static-core": "^4.19.5",
+    "openapi-to-postmanv2": "^4.20.1",
+    "openapi-typescript": "^6.7.5"
+  },
+  "dependencies": {
+    "@apidevtools/swagger-parser": "^10.1.0",
+    "js-yaml": "^4.1.0",
+    "stepci": "^2.8.0"
+  }
+}
