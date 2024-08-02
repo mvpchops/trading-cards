@@ -78,7 +78,7 @@ export const Config = {
 				authSecret: z.string(),
 				cardsRepoAPI: z.string(),
 				scryfallApiBase: z.string(),
-				cacheURL: z.string().url(),
+				cacheURL: z.string(),
 				databaseUrl: z.string().url(),
 				rateLimitHourWindow: z.coerce.number(),
 				cardsRepoMaxRetries: z.coerce.number(),
