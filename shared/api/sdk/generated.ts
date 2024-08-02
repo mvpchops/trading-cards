@@ -7,7 +7,7 @@
 export type paths = {
   "/": {
     /**
-     * API Home
+     * API Home & Healthcheck URI
      * @description The home endpoint for this API. Displays basic informational message
      */
     get: operations["apiHome"];
@@ -254,7 +254,7 @@ export type external = Record<string, never>;
 export type operations = {
 
   /**
-   * API Home
+   * API Home & Healthcheck URI
    * @description The home endpoint for this API. Displays basic informational message
    */
   apiHome: {

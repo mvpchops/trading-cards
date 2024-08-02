@@ -4,8 +4,8 @@ import {
 	expressApp, apiDocumentationRoot, Config
 } from 'backend-core';
 
-import { service as usersService } from 'users';
-import {service as searchCardsService} from 'searchcards';
+import { service as usersService } from 'backend-users';
+import {service as searchCardsService} from 'backend-searchcards';
 import type { Router, Request, Response } from 'express-serve-static-core';
 
 // eslint-disable-next-line new-cap

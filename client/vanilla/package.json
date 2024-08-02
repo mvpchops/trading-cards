@@ -6,7 +6,7 @@
         "clean": "rm -rf dist",
         "check": "npx @biomejs/biome check --write ./src",
         "start": "parcel -p 8888",
-        "start:dev": "pnpm build && http-server ./dist",
+        "start:dev": "pnpm -F client-core build && pnpm -F client-vanilla build && http-server ./dist",
         "build": "pnpm clean && parcel build"
     },
     "keywords": [],

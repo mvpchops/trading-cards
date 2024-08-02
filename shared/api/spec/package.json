@@ -18,15 +18,15 @@
   "author": "MVP Chops <mvpchops@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@redocly/cli": "^1.11.0",
-    "@stoplight/prism-cli": "^5.7.0",
+    "@redocly/cli": "1.19.0",
+    "@stoplight/prism-cli": "5.7.0",
     "@types/express-serve-static-core": "^4.19.5",
-    "openapi-to-postmanv2": "^4.20.1",
-    "openapi-typescript": "^6.7.5"
+    "openapi-to-postmanv2": "4.20.1",
+    "openapi-typescript": "6.7.5"
   },
   "dependencies": {
-    "@apidevtools/swagger-parser": "^10.1.0",
-    "js-yaml": "^4.1.0",
-    "stepci": "^2.8.0"
+    "@apidevtools/swagger-parser": "10.1.0",
+    "js-yaml": "4.1.0",
+    "stepci": "2.8.0"
   }
 }
