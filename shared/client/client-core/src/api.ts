@@ -17,8 +17,7 @@ const CallStatusInFlight = "INFLIGHT";
 let delayChain: Promise<unknown> | undefined;
 let APICallStatus = CallStatusReady;
 
-// TODO: make this configurable for dev & prod
-const apiBase = "http://localhost:8889";
+const apiBase = process.env['SERVER_URL'] || "http://localhost:8889";
 
 const searchForTerm =
 	(term: string, pagedTo = ""): APIInvokerFunction =>
