@@ -1,5 +1,5 @@
 {
-    "name": "vanilla-client",
+    "name": "client-vanilla",
     "version": "1.0.0",
     "source": "src/index.html",
     "scripts": {
