@@ -6,6 +6,7 @@ import type { AppLogLevels, AppLogger } from "./types.js";
 const env = Config.get().env;
 const isTestEnv = env === "test";
 const isDevEnv = env === "development";
+const isDeployedEnv = !isTestEnv && !isDevEnv;
 const appName = Config.get().appName;
 
 winston.addColors({
@@ -32,25 +33,25 @@ const logFormat = (loggingAs?: string) =>
 		}),
 	);
 
-let transports: winston.transport[] = [
-	new winston.transports.File({
-		filename: `/var/log/${appName}/error.log`,
-		level: "error",
-	}),
-	new winston.transports.File({
-		filename: `/var/log/${appName}/access.log`,
-		level: "http",
-	}),
-	new winston.transports.File({
-		filename: `/var/log/${appName}/battle.log`,
-		level: "battle",
-	}),
-];
+let transports: winston.transport[] = [];
 
-if (isTestEnv) {
+if (isTestEnv || isDevEnv) {
 	transports = [new winston.transports.Console()];
-} else if (isDevEnv) {
-	transports.unshift(new winston.transports.Console());
+} else if (isDeployedEnv) {
+	transports = [
+		new winston.transports.File({
+			filename: `/var/log/${appName}/error.log`,
+			level: "error",
+		}),
+		new winston.transports.File({
+			filename: `/var/log/${appName}/access.log`,
+			level: "http",
+		}),
+		new winston.transports.File({
+			filename: `/var/log/${appName}/battle.log`,
+			level: "battle",
+		})
+	];
 }
 
 const levels: AppLogLevels = {

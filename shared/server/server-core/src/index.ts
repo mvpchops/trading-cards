@@ -209,6 +209,7 @@ export const expressApp = (
 
 	process.on("SIGINT", terminateGracefully(server, "SIGINT"));
 	process.on("SIGTERM", terminateGracefully(server, "SIGTERM"));
+	process.on("SIGHUP", terminateGracefully(server, "SIGHUP"));
 };
 
 export type BackendService = {
