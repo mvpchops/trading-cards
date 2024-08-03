@@ -1,6 +1,6 @@
 import type { Router } from "express-serve-static-core";
-import type { BackendService } from "backend-core";
-import { jwtAuthenticateMW } from "backend-core";
+import type { BackendService } from "server-core";
+import { jwtAuthenticateMW } from "server-core";
 import {
 	createUserController,
 	userLoginController,

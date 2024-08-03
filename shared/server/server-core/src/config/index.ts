@@ -12,8 +12,8 @@ const cwd = process.cwd();
 if (cwd.endsWith("entrypoint")) {
 	backToRoot.push("../", "../");
 }
-// we are reaching into the backend-core module to run scripts like DB migrations
-else if (cwd.endsWith("backend-core")) {
+// we are reaching into the server-core module to run scripts like DB migrations
+else if (cwd.endsWith("server-core")) {
 	backToRoot.push("../", "../", "../");
 }
 // we are running the tests

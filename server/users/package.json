@@ -1,5 +1,5 @@
 {
-    "name": "backend-users",
+    "name": "server-users",
     "version": "1.0.0",
     "type": "module",
     "main": "./dist/index.js",
@@ -15,7 +15,7 @@
     "author": "MVP Chops <mvpchops@gmail.com>",
     "license": "MIT",
     "dependencies": {
-        "backend-core": "workspace:^",
+        "server-core": "workspace:^",
         "dotenv": "^16.4.5",
         "drizzle-orm": "^0.31.2",
         "passport": "^0.7.0",

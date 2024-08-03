@@ -6,7 +6,7 @@ import {
 	logAs,
 	schema,
 	redis,
-} from "backend-core";
+} from "server-core";
 import { eq, and } from "drizzle-orm";
 import * as errors from "./users.errors.js";
 

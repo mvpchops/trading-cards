@@ -34,7 +34,7 @@ export * from "./drizzle/db.js";
 export * from "./config/index.js";
 export const apiDocumentationRoot = path.join(path.dirname(__filename), "docs");
 
-const log = logAs("backend-core");
+const log = logAs("server-core");
 const ymlFilePath = path.resolve(path.dirname(__filename), "api.yaml");
 const ymlAsString = fs.readFileSync(ymlFilePath, "utf8");
 const apiSpecYaml = jsyaml.load(ymlAsString) as string;

@@ -2,10 +2,10 @@ import express from 'express';
 import {
 	/*apiRateLimiter, */ apiAutoValidator, cacheFor,
 	expressApp, apiDocumentationRoot, Config
-} from 'backend-core';
+} from 'server-core';
 
-import { service as usersService } from 'backend-users';
-import {service as searchCardsService} from 'backend-searchcards';
+import { service as usersService } from 'server-users';
+import {service as searchCardsService} from 'server-searchcards';
 import type { Router, Request, Response } from 'express-serve-static-core';
 
 // eslint-disable-next-line new-cap

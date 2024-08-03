@@ -128,21 +128,21 @@ importers:
 
   server/entrypoint:
     dependencies:
-      backend-core:
-        specifier: workspace:^
-        version: link:../../shared/server/backend-core
-      backend-searchcards:
-        specifier: workspace:^
-        version: link:../searchcards
-      backend-users:
-        specifier: workspace:^
-        version: link:../users
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
       express:
         specifier: ^4.19.2
         version: 4.19.2
+      server-core:
+        specifier: workspace:^
+        version: link:../../shared/server/server-core
+      server-searchcards:
+        specifier: workspace:^
+        version: link:../searchcards
+      server-users:
+        specifier: workspace:^
+        version: link:../users
     devDependencies:
       '@types/express':
         specifier: ^4.17.21
@@ -162,15 +162,15 @@ importers:
       axios:
         specifier: ^1.7.2
         version: 1.7.2
-      backend-core:
-        specifier: workspace:^
-        version: link:../../shared/server/backend-core
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
       exponential-backoff:
         specifier: ^3.1.1
         version: 3.1.1
+      server-core:
+        specifier: workspace:^
+        version: link:../../shared/server/server-core
     devDependencies:
       '@types/express-serve-static-core':
         specifier: ^4.19.5
@@ -178,9 +178,6 @@ importers:
 
   server/users:
     dependencies:
-      backend-core:
-        specifier: workspace:^
-        version: link:../../shared/server/backend-core
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -193,6 +190,9 @@ importers:
       passport-local:
         specifier: ^1.0.0
         version: 1.0.0
+      server-core:
+        specifier: workspace:^
+        version: link:../../shared/server/server-core
     devDependencies:
       '@types/express-serve-static-core':
         specifier: ^4.19.5
@@ -204,30 +204,30 @@ importers:
   shared/api/spec:
     dependencies:
       '@apidevtools/swagger-parser':
-        specifier: ^10.1.0
+        specifier: 10.1.0
         version: 10.1.0(openapi-types@12.1.3)
       js-yaml:
-        specifier: ^4.1.0
+        specifier: 4.1.0
         version: 4.1.0
       stepci:
-        specifier: ^2.8.0
-        version: 2.8.2(openapi-types@12.1.3)
+        specifier: 2.8.0
+        version: 2.8.0(openapi-types@12.1.3)
     devDependencies:
       '@redocly/cli':
-        specifier: ^1.19.0
+        specifier: 1.19.0
         version: 1.19.0(enzyme@3.11.0)
       '@stoplight/prism-cli':
-        specifier: ^5.7.0
-        version: 5.8.3
+        specifier: 5.7.0
+        version: 5.7.0
       '@types/express-serve-static-core':
         specifier: ^4.19.5
         version: 4.19.5
       openapi-to-postmanv2:
-        specifier: ^4.20.1
-        version: 4.23.1
+        specifier: 4.20.1
+        version: 4.20.1
       openapi-typescript:
-        specifier: ^6.7.5
-        version: 6.7.6
+        specifier: 6.7.5
+        version: 6.7.5
 
   shared/client/client-core:
     dependencies:
@@ -235,7 +235,7 @@ importers:
         specifier: ^10.1.1
         version: 10.1.1
 
-  shared/server/backend-core:
+  shared/server/server-core:
     dependencies:
       '@t3-oss/env-core':
         specifier: ^0.10.1
@@ -1636,9 +1636,9 @@ packages:
     resolution: {integrity: sha512-lyIc6JUlUA8Ve5ELywPC8I2Sdnh1zc1zmbYgVarhXIp9YeAB0ReeqmGEOWNtlHkbP2DAA1AL65Wfn2ncjK/jtQ==}
     engines: {node: '>=8'}
 
-  '@stoplight/prism-cli@5.8.3':
-    resolution: {integrity: sha512-Tp3bRKp0Q8P0szB9ozsyYDC+BJ+wtcLkInnD3WZQcAeM8irqAfkqwCTVigpcCJeKYRB2p9PtxpG1XtGB5TDP1g==}
-    engines: {node: '>=18.20.1'}
+  '@stoplight/prism-cli@5.7.0':
+    resolution: {integrity: sha512-0V6z9Zcbj/+yLJqajTHnO6nbBknHZqXpL7zZzS3DTZkzs19H0X2nZcI+4unImxEChmFTJif+zzW0q3W6KJfJAA==}
+    engines: {node: '>=16'}
     hasBin: true
 
   '@stoplight/prism-core@5.8.0':
@@ -4246,16 +4246,16 @@ packages:
   openapi-sampler@1.5.1:
     resolution: {integrity: sha512-tIWIrZUKNAsbqf3bd9U1oH6JEXo8LNYuDlXw26By67EygpjT+ArFnsxxyTMjFWRfbqo5ozkvgSQDK69Gd8CddA==}
 
-  openapi-to-postmanv2@4.23.1:
-    resolution: {integrity: sha512-vNGU95euiXriNw7sVJ82uZyCyV8rXxSkc5o8bcDQh2IonO6cwzVUbrfYPnnj6A18YTGHSWHhQpUy0otxDHFoCw==}
+  openapi-to-postmanv2@4.20.1:
+    resolution: {integrity: sha512-Cr8fWZVtBk6M+vzyogeJGUpSrGatugMkPmaBZsbdS3rXNir1xRxUG6KQ4RTL8LoaK1oVGlIfU9Jp9NsPmockfg==}
     engines: {node: '>=8'}
     hasBin: true
 
   openapi-types@12.1.3:
     resolution: {integrity: sha512-N4YtSYJqghVu4iek2ZUvcN/0aqH1kRDuNqzcycDxhOUpg7GdvLa2F3DgS6yBNhInhv2r/6I0Flkn7CqL8+nIcw==}
 
-  openapi-typescript@6.7.6:
-    resolution: {integrity: sha512-c/hfooPx+RBIOPM09GSxABOZhYPblDoyaGhqBkD/59vtpN21jEuWKDlM0KYTvqJVlSYjKs0tBcIdeXKChlSPtw==}
+  openapi-typescript@6.7.5:
+    resolution: {integrity: sha512-ZD6dgSZi0u1QCP55g8/2yS5hNJfIpgqsSGHLxxdOjvY7eIrXzj271FJEQw33VwsZ6RCtO/NOuhxa7GBWmEudyA==}
     hasBin: true
 
   openapi3-ts@2.0.2:
@@ -4559,6 +4559,10 @@ packages:
   posthtml@0.16.6:
     resolution: {integrity: sha512-JcEmHlyLK/o0uGAlj65vgg+7LIms0xKXe60lcDOTU7oVX/3LuEuLwrQpW3VJ7de5TaFKiW4kWkaIpJL42FEgxQ==}
     engines: {node: '>=12.0.0'}
+
+  postman-collection@4.2.1:
+    resolution: {integrity: sha512-DFLt3/yu8+ldtOTIzmBUctoupKJBOVK4NZO0t68K2lIir9smQg7OdQTBjOXYy+PDh7u0pSDvD66tm93eBHEPHA==}
+    engines: {node: '>=10'}
 
   postman-collection@4.4.1:
     resolution: {integrity: sha512-1oS1x+Y7gLGV3xF+EwdZtZOmZILsDTogTHdv2nssTjO+bAo7yr++nOwINT1p3A3mrDeCuEscMJmbJzil57FedQ==}
@@ -5014,8 +5018,8 @@ packages:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
     engines: {node: '>= 0.8'}
 
-  stepci@2.8.2:
-    resolution: {integrity: sha512-Fsz/5r9YO3oWbfCJ901o7RxScY7DU7x+szp0/3njSDYvZoLlKBfusGSaJwaYP+0a5aFkktImY2EnFyUbn34U1g==}
+  stepci@2.8.0:
+    resolution: {integrity: sha512-/7+0lHG/k9W/cighLr2Qr8xDsJDZn6CEcOglZLSpfAXc92KZ+4TDX5NBVgE0iHKJTbGevLsRhreu/H7WeaL5Jw==}
     hasBin: true
 
   stickyfill@1.1.1:
@@ -6925,7 +6929,7 @@ snapshots:
 
   '@stoplight/path@1.3.2': {}
 
-  '@stoplight/prism-cli@5.8.3':
+  '@stoplight/prism-cli@5.7.0':
     dependencies:
       '@stoplight/json': 3.21.5
       '@stoplight/json-schema-ref-parser': 9.2.7
@@ -9812,7 +9816,7 @@ snapshots:
       '@types/json-schema': 7.0.15
       json-pointer: 0.6.2
 
-  openapi-to-postmanv2@4.23.1:
+  openapi-to-postmanv2@4.20.1:
     dependencies:
       ajv: 8.11.0
       ajv-draft-04: 1.0.0(ajv@8.11.0)
@@ -9826,7 +9830,7 @@ snapshots:
       oas-resolver-browser: 2.5.6
       object-hash: 3.0.0
       path-browserify: 1.0.1
-      postman-collection: 4.4.1
+      postman-collection: 4.2.1
       swagger2openapi: 7.0.8
       traverse: 0.6.6
       yaml: 1.10.2
@@ -9835,7 +9839,7 @@ snapshots:
 
   openapi-types@12.1.3: {}
 
-  openapi-typescript@6.7.6:
+  openapi-typescript@6.7.5:
     dependencies:
       ansi-colors: 4.1.3
       fast-glob: 3.3.2
@@ -10139,6 +10143,20 @@ snapshots:
     dependencies:
       posthtml-parser: 0.11.0
       posthtml-render: 3.0.0
+
+  postman-collection@4.2.1:
+    dependencies:
+      '@faker-js/faker': 5.5.3
+      file-type: 3.9.0
+      http-reasons: 0.1.0
+      iconv-lite: 0.6.3
+      liquid-json: 0.3.1
+      lodash: 4.17.21
+      mime-format: 2.0.1
+      mime-types: 2.1.35
+      postman-url-encoder: 3.0.5
+      semver: 7.5.4
+      uuid: 8.3.2
 
   postman-collection@4.4.1:
     dependencies:
@@ -10690,7 +10708,7 @@ snapshots:
 
   statuses@2.0.1: {}
 
-  stepci@2.8.2(openapi-types@12.1.3):
+  stepci@2.8.0(openapi-types@12.1.3):
     dependencies:
       '@stepci/plugin-openapi': 0.3.9(openapi-types@12.1.3)
       '@stepci/runner': 2.0.7

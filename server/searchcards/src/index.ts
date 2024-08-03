@@ -1,5 +1,5 @@
 import type { Router } from 'express-serve-static-core';
-import type { BackendService } from 'backend-core';
+import type { BackendService } from 'server-core';
 import { searchTradingGameCardsController } from './searchcards.controller.js';
 
 const useRouter = (router: Router): void => {

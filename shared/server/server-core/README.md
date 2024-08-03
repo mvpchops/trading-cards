@@ -1,11 +1,11 @@
-## Backend-Core
+## Server-Core
 
 Core shared functionalities and types for other backend services
 
 ```typescript
 import {
 	cacheFor
-} from 'backend-core';
+} from 'server-core';
 
 const router: Router = express.Router({caseSensitive: true});
 

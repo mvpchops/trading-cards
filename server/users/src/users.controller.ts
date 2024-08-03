@@ -1,8 +1,8 @@
-import { logAs } from "backend-core";
+import { logAs } from "server-core";
 import type * as oas from "../../../shared/api/sdk/types.js";
 import * as errors from "./users.errors.js";
 import * as service from "./users.service.js";
-import type { JwtDataPayload } from "backend-core";
+import type { JwtDataPayload } from "server-core";
 
 const log = logAs("users");
 

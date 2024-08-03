@@ -1,4 +1,4 @@
-import { logAs } from 'backend-core';
+import { logAs } from 'server-core';
 import * as service from './searchcards.service.js';
 import type * as oas from '../../../shared/api/sdk/types.js';
 

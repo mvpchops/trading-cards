@@ -1,4 +1,4 @@
-import { logAs, Config } from 'backend-core';
+import { logAs, Config } from 'server-core';
 import { backOff } from "exponential-backoff";
 import { cardsRepo } from './external-cards-apis.js';
 import * as errors from './searchcards.errors.js';

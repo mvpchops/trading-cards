@@ -1,5 +1,5 @@
 {
-  "name": "backend-entrypoint",
+  "name": "server-entrypoint",
   "version": "1.0.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -10,18 +10,18 @@
     "clean": "rm -rf dist",
     "check": "npx @biomejs/biome check --write ./src",
     "start": "node ./dist/index.js",
-    "start:dev": "pnpm -F backend-* build && NODE_ENV=development nodemon ./dist/index.js",
-    "start:test": "pnpm -F backend-* build && NODE_ENV=test node ./dist/index.js"
+    "start:dev": "pnpm -F server-* build && NODE_ENV=development nodemon ./dist/index.js",
+    "start:test": "pnpm -F server-* build && NODE_ENV=test node ./dist/index.js"
   },
   "keywords": [],
   "author": "MVP Chops <mvpchops@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "backend-core": "workspace:^",
+    "server-core": "workspace:^",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "backend-searchcards": "workspace:^",
-    "backend-users": "workspace:^"
+    "server-searchcards": "workspace:^",
+    "server-users": "workspace:^"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

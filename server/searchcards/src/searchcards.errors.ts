@@ -1,4 +1,4 @@
-import { BackendApplicationError } from "backend-core";
+import { BackendApplicationError } from 'server-core';
 
 export class CardsServiceError extends BackendApplicationError {}
 

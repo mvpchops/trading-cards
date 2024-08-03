@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { logAs, Config } from 'backend-core';
+import { logAs, Config } from 'server-core';
 import type * as oas from '../../../shared/api/sdk/types.js';
 import type { 
     CardsRepository, CardsRepositoryStrategy,
