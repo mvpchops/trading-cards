@@ -4,7 +4,8 @@ import { geMorganMiddleware } from "./config/morgan.js";
 import type { AppLogLevels, AppLogger } from "./types.js";
 
 const env = Config.get().env;
-const isDevOrTestEnv = env === "development" || env === "test";
+const isTestEnv = env === "test";
+const isDevEnv = env === "development";
 const appName = Config.get().appName;
 
 winston.addColors({
@@ -31,7 +32,7 @@ const logFormat = (loggingAs?: string) =>
 		}),
 	);
 
-const transports: winston.transport[] = [
+let transports: winston.transport[] = [
 	new winston.transports.File({
 		filename: `/var/log/${appName}/error.log`,
 		level: "error",
@@ -46,7 +47,9 @@ const transports: winston.transport[] = [
 	}),
 ];
 
-if (isDevOrTestEnv) {
+if (isTestEnv) {
+	transports = [new winston.transports.Console()];
+} else if (isDevEnv) {
 	transports.unshift(new winston.transports.Console());
 }
 
