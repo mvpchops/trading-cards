@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test Backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+            run_install: false
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+            node-version: 20
+            cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Setup Test Environment
+        run: |
+            cp .env.example .env.test.local
+            pnpm add --workspace-root wait-on -D
+
+      - name: Run Integration Tests
+        run: |
+            pnpm -F server-entrypoint start:test &
+            pnpm wait-on tcp:8889 && pnpm test
