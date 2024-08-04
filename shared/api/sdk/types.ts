@@ -66,8 +66,18 @@ export type RouteSpec<OP extends OperationIDs, S extends HttpStatus> = {
 };
 // export type GetExamples = RouteSpec<'examplePath', 200>;
 
+// Utility type to convert {param} to :param in path strings
+type PathParams<Path extends string> =
+    Path extends `${infer Start}{${infer Param}}${infer Rest}`
+        ? `${Start}:${Param}${PathParams<Rest>}`
+        : Path;
+
+interface APIEndpoint {
+    route: PathParams<keyof paths>;
+}
+
 // Users
-type CreateUserEndpoint = {
+interface CreateUserEndpoint extends APIEndpoint {
     route: '/users';
     reqBody: CreateUserDto;
     resBody: UserCreatedDto | APIResponseError;
@@ -76,7 +86,7 @@ type CreateUserEndpoint = {
 type CreateUserRouter = APIRouter<CreateUserEndpoint>;
 export type CreateUserHandler = Handler<CreateUserEndpoint>;
 
-type UserLoginEndpoint = {
+interface UserLoginEndpoint extends APIEndpoint {
     route: '/authenticate';
     reqBody: LoginAttempt;
     resBody: AuthToken | APIResponseError
@@ -85,20 +95,20 @@ type UserLoginEndpoint = {
 type LoginUserRouter = APIRouter<UserLoginEndpoint>;
 export type LoginUserHandler = Handler<UserLoginEndpoint>;
 
-type GetUserEndpoint = {
+interface GetUserEndpoint extends APIEndpoint {
     route: '/users/me';
     resBody: UserDto | APIResponseError;
 };
 export type GetUserHandler = Handler<GetUserEndpoint>;
 
-type AddToFavoritesEndpoint = {
+interface AddToFavoritesEndpoint extends APIEndpoint {
     route: '/users/:userId/favorites';
     reqBody: FavCardDto;
     resBody: APIResponseError;
 };
 export type AddToFavoritesHandler = Handler<AddToFavoritesEndpoint>;
 
-type RemoveFromFavoritesEndpoint = {
+interface RemoveFromFavoritesEndpoint extends APIEndpoint {
     route: '/users/:userId/favorites';
     reqBody: FavCardDto;
     resBody: APIResponseError;
@@ -109,7 +119,7 @@ export type UsersRouter = CreateUserRouter | LoginUserRouter;
 // End Users
 
 // Search Cards
-type SearchCardsEndpoint = {
+interface SearchCardsEndpoint extends APIEndpoint {
     route: '/search';
     queryParams: SearchCardsQureyParams;
     resBody: CardsQueryResponse | APIResponseError;
