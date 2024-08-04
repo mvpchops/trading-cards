@@ -13,3 +13,10 @@ export const db = () => {
     return drizzle(client, { schema });
 };
 export * as schema from "./schema.js";
+
+export const closeDbConnection = async () => {
+    if (client) {
+        await client.end();
+        client = undefined;
+    }
+}

@@ -9,3 +9,10 @@ export const redis = () => {
     }
     return redisClient;
 }
+
+export const closeRedisConnection = async () => {
+    if (redisClient) {
+        await redisClient.disconnect();
+        redisClient = undefined;
+    }
+}

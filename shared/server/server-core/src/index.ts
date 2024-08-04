@@ -13,6 +13,9 @@ import { Config } from "./config/index.js";
 import { logAs, logMiddleware } from "./logger.js";
 import { isUlidFormat } from "./openapi-formats/index.js";
 
+import { closeRedisConnection } from "./cache.js";
+import { closeDbConnection } from "./drizzle/db.js";
+
 import type { Server } from "node:http";
 import type {
 	ErrorRequestHandler,
@@ -107,10 +110,11 @@ export const cacheFor = <T extends number>(
 };
 
 const terminateGracefully = (server: Server, signal: string) => {
-	function terminationHandler() {
+	async function terminationHandler() {
 		log.info(
 			`[${appName} Server] Received ${signal.toUpperCase()} - terminating gracefully...`,
 		);
+		await Promise.all([closeRedisConnection(), closeDbConnection()]);
 		server.close(() => {
 			log.info(`[${appName} Server] terminated by ${signal.toUpperCase()}`);
 			// eslint-disable-next-line unicorn/no-process-exit
