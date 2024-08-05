@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha",
+    "test:coverage": "NODE_ENV=test c8 mocha",
     "check": "pnpm -r run check",
     "clean": "pnpm -r run clean",
     "start": "pnpm --stream -r start",
@@ -23,6 +24,7 @@
     "@tsconfig/strictest": "^2.0.4",
     "@types/chai": "^4.3.16",
     "@types/mocha": "^10.0.7",
+    "c8": "^10.1.2",
     "chai": "^5.1.1",
     "mocha": "^10.6.0",
     "process": "^0.11.10",

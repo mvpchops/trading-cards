@@ -26,11 +26,11 @@ const startDBContainer = () => {
         .withLogConsumer((stream) => {
             stream.on("data", line => {
                 if (line.includes('docker-entrypoint-initdb')) {
-                    console.log('[DB] ', line);
+                    console.log('[DB Container] ', line);
                 }
             });
-            stream.on("err", line => console.error('[DB] ', line));
-            stream.on("end", () => console.log("[DB] Stream closed\n"));
+            stream.on("err", line => console.error('[DB Container] ', line));
+            stream.on("end", () => console.log("[DB Container] Stream closed"));
         })
         .withExposedPorts(5432);
 };
@@ -57,7 +57,7 @@ export async function startTestContainers() {
     const dbURL = dbContainer.getConnectionUri();
     const cacheURL = cacheContainer.getConnectionUrl();
 
-    containers.push(dbContainer, cacheContainer);
+    containers.push(cacheContainer, dbContainer);
 
     return { dbURL, cacheURL };
 }

@@ -101,7 +101,11 @@ export const getUser = async (userId: oas.UserId): Promise<oas.UserDto> => {
 		throw new errors.UserServiceError(errors.CANNOT_RETRIEVE_USER_MSG);
 
 	const cachedUser = await redis().get(userId);
-	if (cachedUser) return JSON.parse(cachedUser);
+	if (cachedUser) {
+		const user = JSON.parse(cachedUser);
+		log.info(`retrieved cached user [${user.nickname}]`);
+		return user;
+	}
 
 	const [user] = await db()
 		.select({

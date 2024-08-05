@@ -1,0 +1,19 @@
+{
+    "check-coverage": true,
+    "all": true,
+    "include": [
+        "shared/server/**/*.ts",
+        "server/**/*.ts"
+    ],
+    "exclude": [
+        "server/**/*types.ts",
+        "server/**/dist/**/*.*",
+        "shared/server/**/dist/**/*.*",
+        "server/**/__tests__/**/*.*"
+    ],
+    "reporter": [
+        "text",
+        "text-summary"
+    ],
+    "report-dir": "coverage"
+}

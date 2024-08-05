@@ -114,12 +114,31 @@ const terminateGracefully = (server: Server, signal: string) => {
 		log.info(
 			`[${appName} Server] Received ${signal.toUpperCase()} - terminating gracefully...`,
 		);
-		await Promise.all([closeRedisConnection(), closeDbConnection()]);
-		server.close(() => {
-			log.info(`[${appName} Server] terminated by ${signal.toUpperCase()}`);
-			// eslint-disable-next-line unicorn/no-process-exit
-			process.exit(0);
-		});
+		
+		try {
+			await Promise.all([closeRedisConnection(), closeDbConnection()]);
+		} catch (error) {
+			const err = error as Error;
+			log.error(`Error closing connections: ${err.message}`);
+		} finally {
+			server.close((error) => {
+				if (error) {
+					log.error(`Error closing server gracefully: ${error.message}`);
+				} else {
+					log.info(`[${appName} Server] terminated by ${signal.toUpperCase()}`);
+					// eslint-disable-next-line unicorn/no-process-exit
+					process.exit(0);
+				}
+			});
+
+			// If the process hasn't exited naturally, force exit.
+			// `unref` ensures the timer doesn't prevent the process from exiting naturally.
+			setTimeout(() => {
+				// eslint-disable-next-line unicorn/no-process-exit
+				process.exit(0);
+			}, 3000).unref();
+		}
+
 	}
 
 	return terminationHandler;
