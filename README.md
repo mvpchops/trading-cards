@@ -10,27 +10,27 @@ The goal of this project is to create a simple, yet fully functional, testable, 
 
 ## Features & Highlights
 
-> See it in action at [https://trading-cards-react-mvp.netlify.app/](https://trading-cards-react-mvp.netlify.app)
+> :rocket: See it in action at [https://trading-cards-react-mvp.netlify.app](https://trading-cards-react-mvp.netlify.app) :rocket: :rocket:
 
 
-- A PostgreSQL database with data migrations support (via [drizzle-kit](https://github.com/drizzle-team/drizzle-kit))
-- Externalized configuration with type-safe environment variables
-- Utilises Redis caching and supports HTTP caching
-- A well designed and [documented REST API](https://trading-cards-backend-staging.up.railway.app/docs/) using the OpenAPI 3.x specification
-- Modern integration testing with TestContainers
-- Dockerized with Docker Compose and a Dockerfile
-- First class support for TypeScript and pervasive type safety, both in source code and in tests. API controllers and services heavily use types generated from the OpenAPI spec as well as others put together by hand :point_down: :point_down: <br /><br /> 
+1. A PostgreSQL database with data migrations support (via [drizzle-kit](https://github.com/drizzle-team/drizzle-kit))
+2. Externalized configuration with type-safe environment variables
+3. Utilises Redis caching and supports HTTP caching
+4. A well designed and [documented REST API](https://trading-cards-backend-staging.up.railway.app/docs/) using the OpenAPI 3.x specification
+5. Modern integration testing with TestContainers
+6. Dockerized with Docker Compose and a Dockerfile
+7. First class support for TypeScript and pervasive type safety, both in source code and in tests. API controllers and services heavily use types generated from the OpenAPI spec as well as others put together by hand :point_down: :point_down: <br /><br /> 
     ![](/static/images/hand-made-ts-types-transformed.png)
 
 
 ## Wanna Take It For A Spin :sunglasses:
 
-Review the deployed app online :rocket:
+Review the deployed assets online :sparkles: :sparkles:
 
-- React App - https://trading-cards-react-mvp.netlify.app
-- Vanilly HTML/JS App - https://trading-cards-vanilla-js-mvp.netlify.app
-- Backend - https://trading-cards-backend-staging.up.railway.app
-- API Docs - https://trading-cards-backend-staging.up.railway.app/docs/
+1. React Web App - https://trading-cards-react-mvp.netlify.app
+2. Vanilly HTML/JS Web App - https://trading-cards-vanilla-js-mvp.netlify.app
+3. RESTful API Backend - https://trading-cards-backend-staging.up.railway.app
+4. API Documentation - https://trading-cards-backend-staging.up.railway.app/docs/
 
 
 ## Technology Stack
@@ -38,32 +38,32 @@ Review the deployed app online :rocket:
 ![backend topology](/static/images/Railway-backend-topology-transformed.png)
 
 ### Backend
-- Typescript
-- Node.js
-- Express
-- OpenAPI 3.x
-- PostgreSQL
-- Drizzle ORM
-- Redis
+* Typescript
+* Node.js
+* Express
+* OpenAPI 3.x
+* PostgreSQL
+* Drizzle ORM
+* Redis
 
 ### Frontend 
-- Typescript
-- React
-- HTML/CSS
-- Bootstrap
-- Tailwind CSS
-- Parcel
+* Typescript
+* React
+* HTML/CSS
+* Bootstrap
+* Tailwind CSS
+* Parcel
 
 ### CI/CD, Testing, and Packaging
-- Mocha
-- Docker
-- Github Actions
-- TestContainers
+* Mocha
+* Docker
+* Github Actions
+* TestContainers
 
 
 ### Running Tests
 
-[Github Actions will run the tests](https://github.com/mvpchops/trading-cards/actions/runs/10248704190/job/28350534204) on push to the `dev` branch and on pull requests to `dev` and `main` branches
+[Github Actions will run tests](https://github.com/mvpchops/trading-cards/actions/runs/10248704190/job/28350534204) on push to the `dev` branch and on pull requests to `dev` and `main` branches
 
 ![running tests](static/images/GHA-workflow-transformed.png)
 
@@ -163,15 +163,18 @@ sequenceDiagram
             Redis-->>Users: user
             Users->>PostgreSQL: get user from DB if not cached
             PostgreSQL-->>Users: user
-            Users->>PostgreSQL: add pokey to user's favorites
-            Users->>Redis: add pokey to user's favorites
+            Users->>PostgreSQL: add/update card to user's favorites
+            Users->>Redis: add/update card to user's favorites
         deactivate Users
-        Users->>Server: added pokey to user's favorites
+        Users->>Server: added card to user's favorites
         Server-->>WepApp: HTTP 204
     deactivate Server
+    Note over WepApp: update favorites <br /> in local storage
 ```  
 
 ## Contact
 
 If you have any questions, comments or would like to discuss your MVP, feel free to reach out via email at [mvpchops@gmail.com](mailto:mvpchops@gmail.com)
+
+Thank you! :v: :v:
 
