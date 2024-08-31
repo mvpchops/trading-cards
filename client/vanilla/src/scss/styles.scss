@@ -5,6 +5,75 @@ nav.navbar a.icon-link {
     text-decoration: none;
 }
 
+.home-collage {
+    bottom: 0;
+    height: 150px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+
+.home-collage-cards {
+    height: 100%;
+    margin-left: 50%;
+    position: relative;
+    -webkit-transform: translateX(-50%) scale(0.75);
+    -o-transform: translateX(-50%) scale(0.75);
+    transform: translateX(-50%) scale(0.75);
+    width: 655px;
+}
+
+.home-collage a {
+    display: block;
+    height: 100px;
+    position: absolute;
+    -webkit-transform: translateY(0) scale(0.5);
+    -o-transform: translateY(0) scale(0.5);
+    transform: translateY(0) scale(0.5);
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: -webkit-transform 0.3s;
+    -o-transition: -o-transform 0.3s;
+    transition: transform 0.3s;
+    transition: transform 0.3s, -webkit-transform 0.3s, -o-transform 0.3s;
+    width: 168px;
+}
+
+.home-collage a:nth-child(1) {
+    left: 0;
+    top: 22px;
+}
+
+.home-collage a:nth-child(2) {
+    left: 174px;
+    top: 10px;
+}
+
+.home-collage a:nth-child(3) {
+    left: 347px;
+    top: 16px;
+}
+
+.home-collage a:nth-child(4) {
+    right: 0;
+    top: 35px;
+}
+
+.home-collage a:nth-child(5) {
+    left: 35px;
+    top: 62px;
+}
+
+.home-collage a:nth-child(6) {
+    left: 206px;
+    top: 45px;
+}
+
+.home-collage a:nth-child(7) {
+    left: 380px;
+    top: 65px;
+}
+
 #results {
     margin-top: 7em;
     margin-bottom: 3em;
@@ -87,4 +156,19 @@ nav.navbar a.icon-link {
 
 #favslist a.icon-link svg {
     fill: red;
+}
+
+@media only screen and  (max-width: 400px) {
+    nav.navbar #authcta.icon-link,
+    nav.navbar #favscta.icon-link {
+        text-indent: -9999px;
+        margin-right: 0.5em;
+    }
+    
+}
+
+@media only screen and  (max-width: 655px) {
+    .home-collage .home-collage-cards {
+        margin-left: 40%;
+    }
 }

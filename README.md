@@ -152,6 +152,7 @@ sequenceDiagram
     participant Redis as Cache
     
     WepApp->>Server: PATCH /users/:userId/favorites
+    Note over WepApp: PATCH payload <br /> contains card ID
     activate Server
         Server->>BackendCore: is the request valid?
         BackendCore-->>Server: yes #128A0C
